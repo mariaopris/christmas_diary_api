@@ -47,7 +47,13 @@ class UserController extends Controller
 
     public function index()
     {
-        //
+        try {
+            $users = User::all();
+        }catch (\Exception $exception) {
+            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
+        }
+
+        return response()->json(['status' => true, 'users' => $users]);
     }
 
     public function create()
