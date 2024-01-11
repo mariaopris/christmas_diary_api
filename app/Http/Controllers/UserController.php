@@ -8,6 +8,43 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
+    public function getUser(Request $request)
+    {
+
+//        $user = User::where('id',$request->user()->id)->first();
+        try{
+            return response()->json([
+                'id' => $request->user()->id,
+                'email' => $request->user()->email,
+                'password' => $request->user()->password,
+                'name'=>$request->user()->name,
+            ]);
+        }catch (\Exception $exception) {
+            $response = [
+                'state' => false,
+                'error' => $exception->getMessage(),
+            ];
+            return response()->json($response, 400);
+        }
+    }
+
+    public function logout(Request $request){
+        try {
+            $user = $request->user();
+            if ($user !== null) {
+                $user->currentAccessToken()->delete();
+            }
+            return response()->json(['message'=>'Logout successfully']);
+
+        } catch (\Exception $exception) {
+            $response = [
+                'state' => false,
+                'error' => $exception->getMessage(),
+            ];
+            return response()->json($response, 400);
+        }
+    }
+
     public function index()
     {
         //

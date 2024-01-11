@@ -23,3 +23,19 @@ Route::apiResources(
         'user' => App\Http\Controllers\UserController::class,
     ]
 );
+Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'] )->name('login');
+Route::post('/logout', [App\Http\Controllers\UserController::class, 'logout']);
+
+Route::group([
+    'middleware' => [
+        'auth:sanctum',
+        //'role:super-admin'
+    ]
+], function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('/getUser', [App\Http\Controllers\UserController::class, 'getUser']);
+
+});
