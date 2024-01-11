@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    public function getGroups(){
+    public function index(){
         $groups = Group::all();
         return response()->json(['status' => 'success', 'data' => $groups]);
     }

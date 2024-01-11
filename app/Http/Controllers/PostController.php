@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -9,7 +10,8 @@ class PostController extends Controller
 
     public function index()
     {
-        //
+        $posts = Post::all();
+        return response()->json(['status' => 'success', 'data' => $posts]);
     }
 
     public function create()

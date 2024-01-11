@@ -25,7 +25,6 @@ Route::apiResources(
 );
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'] )->name('login');
 Route::post('/logout', [App\Http\Controllers\UserController::class, 'logout']);
-Route::get('getGroups', [\App\Http\Controllers\GroupController::class, 'getGroups']);
 
 Route::group([
     'middleware' => [
@@ -40,3 +39,7 @@ Route::group([
     Route::get('/getUser', [App\Http\Controllers\UserController::class, 'getUser']);
 
 });
+
+Route::get('getGroups', [\App\Http\Controllers\GroupController::class, 'index']);
+Route::get('getPosts', [\App\Http\Controllers\PostController::class, 'index']);
+
