@@ -25,6 +25,7 @@ Route::apiResources(
 );
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'] )->name('login');
 Route::post('/logout', [App\Http\Controllers\UserController::class, 'logout']);
+Route::get('getGroups', [\App\Http\Controllers\GroupController::class, 'getGroups']);
 
 Route::group([
     'middleware' => [
