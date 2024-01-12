@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,6 +13,11 @@ class PostController extends Controller
     public function getPostsForGroup($group_id)
     {
         $posts = Post::where('group_id', $group_id)->get();
+        foreach ($posts as $post) {
+            $user = User::where('id', '=', $post->user_id)->first();
+            $post['user_name'] = $user->name;
+            $post['user_email'] = $user->email;
+        }
         return response()->json(['status' => true, 'posts' => $posts]);
     }
 

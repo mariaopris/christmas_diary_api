@@ -38,5 +38,7 @@ Route::group([
     });
 
     Route::get('/getUser', [App\Http\Controllers\UserController::class, 'getUser']);
-
+    Route::get('getGroups', [App\Http\Controllers\GroupController::class, 'getGroups']);
+    Route::get('getPosts/{id}', [App\Http\Controllers\PostController::class, 'getPostsForGroup']);
+    Route::post('add-group', [\App\Http\Controllers\GroupController::class, 'addGroup']);
 });
